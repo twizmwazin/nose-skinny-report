@@ -16,14 +16,25 @@ class ResultReporter(events.Plugin):
         self.reportCategories = {}
         self.tests = []
 
+    # Nothing about this monstronsity is beutiful or elegant. It desperatly
+    # needs some attention. But... it works, I think
     def startTest(self, event):
+        if isinstance(event.test, Exception):
+            event.handled = true
+            return
         try:
             test = '.'.join([
                 str(sys.modules[event.test._testFunc.__module__].__name__),
                 str(event.test._testFunc.__qualname__),
             ])
         except:
-            test = event.test._name
+            try:
+                test = event.test._name
+            except:
+                test = '.'.join([
+                    type(event.test).__module__,
+                    type(event.test).__qualname__,
+                ])
         if test not in self.tests:
             self.tests.append(test)
         event.handled = True
