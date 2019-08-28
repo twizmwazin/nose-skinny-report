@@ -9,7 +9,7 @@ except ImportError:
 
 setup(
     name='nose-skinny-report',
-    version='0.0.1',
+    version='0.0.2',
     packages=packages,
     install_requires=[
         'nose2',
