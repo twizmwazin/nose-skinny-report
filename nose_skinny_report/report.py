@@ -13,10 +13,7 @@ class ResultReporter(nose2.events.Plugin):
     def startTest(self, event):
         event.handled = True
         if not issubclass(event.test.__class__, Exception):
-            test = event.test.id().split()[0]
-            if 'FunctionTestCase' in type(event.test).__name__:
-                test = "{}.{}".format(event.test.__module__, test)
-            self.tests.append(test)
+            self.tests.append(event.test.id().splitlines()[0])
 
     def afterTestRun(self, event):
         self.tests.sort()

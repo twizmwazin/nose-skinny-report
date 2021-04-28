@@ -9,9 +9,9 @@ except ImportError:
 
 setup(
     name='nose-skinny-report',
-    version='0.0.4',
+    version='0.0.5',
     packages=packages,
     install_requires=[
-        'nose2',
+        'nose2>=0.10.0',
     ]
 )
